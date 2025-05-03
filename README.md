@@ -54,6 +54,5 @@ Se quiser contribuir com o projeto:
 4. Faça o **push** para a branch (`git push origin minha-feature`).
 5. Abra um **Pull Request**.
 
-## 📌 Autor
-Projeto desenvolvido por **Rafael** como Trabalho de Conclusão de Curso (TCC).
+
 
