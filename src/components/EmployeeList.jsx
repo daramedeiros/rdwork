@@ -51,7 +51,7 @@ const EmployeeList = () => {
   );
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", padding: "2rem" }}>
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: "2rem" }}>
       <div style={{ width: "100%", maxWidth: "1200px" }}>
         <h2 className="text-center mb-4">Funcionários</h2>
 
