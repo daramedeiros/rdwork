@@ -6,7 +6,6 @@ const EmployeeForm = () => {
     age: "",
     salary: "",
     hiring_date: "",
-    dismissal_date: "",
     department_id: "",
     job_title: "",
     active: true
@@ -68,10 +67,6 @@ const EmployeeForm = () => {
         <div className="mb-3">
           <label className="form-label">Data de Admissão</label>
           <input type="date" className="form-control" name="hiring_date" value={formData.hiring_date} onChange={handleChange} required />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Data de Demissão</label>
-          <input type="date" className="form-control" name="dismissal_date" value={formData.dismissal_date} onChange={handleChange} />
         </div>
         <div className="mb-3">
           <label className="form-label">ID do Departamento</label>
