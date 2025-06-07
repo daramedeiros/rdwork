@@ -8,7 +8,7 @@ const EmployeeList = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch("https://sua-api.com/employees");
+        const response = await fetch("http://localhost:8080/employees");
         if (!response.ok) throw new Error("Erro ao carregar funcionários.");
         const data = await response.json();
         setEmployees(data);
@@ -20,14 +20,23 @@ const EmployeeList = () => {
     fetchEmployees();
   }, []);
 
-  const dismissEmployee = (id) => {
-    const updated = employees.map(emp =>
-      emp.id === id
-        ? { ...emp, active: false, dismissal_date: new Date().toISOString().split("T")[0] }
-        : emp
-    );
-    setEmployees(updated);
-    setMessage({ type: "success", text: "Funcionário demitido." });
+  const dismissEmployee = async (id) => {
+    const dismissalDate = new Date().toISOString().split("T")[0];
+    try {
+      const response = await fetch(`http://localhost:8080/employee?dismissal_date=${dismissalDate}&employee_id=${id}`, {
+        method: "PATCH"
+      });
+
+      if (!response.ok) throw new Error("Erro ao demitir funcionário.");
+
+      const updated = employees.map(emp =>
+        emp.id === id ? { ...emp, active: false, dismissal_date: dismissalDate } : emp
+      );
+      setEmployees(updated);
+      setMessage({ type: "success", text: "Funcionário demitido com sucesso." });
+    } catch (err) {
+      setMessage({ type: "error", text: err.message });
+    }
   };
 
   const formatDate = (isoDate) => {
@@ -42,7 +51,7 @@ const EmployeeList = () => {
   );
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ padding: "2rem" }}>
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "100vh", padding: "2rem" }}>
       <div style={{ width: "100%", maxWidth: "1200px" }}>
         <h2 className="text-center mb-4">Funcionários</h2>
 
